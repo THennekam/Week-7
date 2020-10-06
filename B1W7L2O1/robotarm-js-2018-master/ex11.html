@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <canvas id="canvas" width="800" height="600"></canvas>
+        <script src="./robot-arm.js"></script>
+        <script>
+            // Robotarm bibliotheek inladen
+            var canvas = document.getElementById("canvas");
+            var robotArm = new RobotArm(canvas);
+            
+            // Het level inladen
+            robotArm.loadLevel("exercise 11");
+            robotArm.speed = 500;
+            
+            // Jou instructies volgen hier
+            for (var i = 8 - 1; i>= 0; i--) {
+            robotArm.moveRight()
+            }                                             //i = 8-1 en niet 9 - 1 omdat het witte blokje niet verplaatst kan worden als het al helemaal rechts staat
+            for (var i = 8 - 1; i>= 0; i--) { //i = 8-1 hier omdat alleen 8 vakjes met blokjes gevuld worden, eerste blijft altijd leeg
+            robotArm.grab();
+            color = robotArm.scan();
+            if (color == 'white') {
+            robotArm.moveRight();
+            robotArm.drop();
+            robotArm.moveLeft();
+            }
+            robotArm.drop();
+            robotArm.moveLeft();
+            }
+        
+
+
+            // De door jou opgegeven instructies uitvoeren
+            robotArm.run();
+        </script>
+    </body>
+</html>
